@@ -1,18 +1,18 @@
 // app/page.js
 import Hero from "@/components/Hero";
-import  WhyUs from "@/components/About";
-import ContactInfo from "@/components/contactSection";
+import  WhyUs from "@/components/about";
+import Contact from "@/components/contact";
 import Dept from "@/components/departmentSec";
-import HowItWorks from "./howItWork";
+import HowItWorks from "@/components/howItWork";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Hero />
       <WhyUs />
-      {/* <Dept />
+      <Dept />
       <HowItWorks />
-      <ContactInfo /> */}
+      <Contact />
     </div>
   );
 }
