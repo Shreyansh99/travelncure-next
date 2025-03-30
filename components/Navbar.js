@@ -1,4 +1,4 @@
-"use client"; // Required for stateful components in Next.js App Router
+"use client";
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -8,8 +8,8 @@ import Link from "next/link";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
 
-  // Handle navbar appearance on scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -48,7 +48,31 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex space-x-8 relative">
+          {/* Explore Dropdown */}
+          <div className="relative">
+            <button
+              className="text-md font-medium text-foreground/80 hover:text-primary transition-colors"
+              onClick={() => setExploreOpen(!exploreOpen)}
+            >
+              Explore
+            </button>
+            {exploreOpen && (
+              <div className="absolute left-0 mt-2 bg-white rounded-md shadow-lg p-4 w-48 z-10">
+                <Link href="/hospitals">
+                  <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
+                    Hospitals
+                  </div>
+                </Link>
+                <Link href="/doctors">
+                  <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
+                    Doctors
+                  </div>
+                </Link>
+              </div>
+            )}
+          </div>
+          
           {navLinks.map((link, i) => (
             <Link key={link.name} href={link.to}>
               <motion.div
@@ -61,6 +85,8 @@ const Navbar = () => {
               </motion.div>
             </Link>
           ))}
+
+          
         </nav>
 
         {/* Mobile Menu Button */}
@@ -111,6 +137,31 @@ const Navbar = () => {
               </div>
             </Link>
           ))}
+          <div className="relative">
+            <button
+              className="text-xl font-medium hover:text-primary transition-colors"
+              onClick={() => {
+                setExploreOpen(!exploreOpen);
+                setMobileMenuOpen(false); // Close mobile menu when explore is opened
+              }}
+            >
+              Explore
+            </button>
+            {exploreOpen && (
+              <div className="absolute left-0 mt-2 bg-white rounded-md shadow-lg p-4 w-48 z-10">
+                <Link href="/hospitals">
+                  <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
+                    Hospitals
+                  </div>
+                </Link>
+                <Link href="/doctors">
+                  <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
+                    Doctors
+                  </div>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
