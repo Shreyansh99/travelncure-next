@@ -14,14 +14,55 @@ const Contact = () => {
     setTimeout(() => setToastMessage(null), duration);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    contact: "",
+    country: "",
+    message: "",
+  });
 
-    showToast(
-      "Message received",
-      "We'll get back to you as soon as possible.",
-      5000
-    );
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value});
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch(
+        "https://medical-tourism-lqcu.onrender.com/api/patient/contactus",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await response.json();
+
+      if(!response.ok) {
+        throw new Error(data.message || "Failed to Contact, Try Again!");
+      }
+
+      //After successful registration, show following message
+      showToast(
+        "Message received",
+        "We'll get back to you as soon as possible.",
+        5000
+      );
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
 
     const form = e.target;
     form.reset();
@@ -172,6 +213,7 @@ const Contact = () => {
             transition={{ duration: 0.7 }}
             className="blue-glass rounded-2xl p-8 md:p-10 shadow-lg"
           >
+            {error && <p className="text-red-500"> {error} </p>}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -186,6 +228,7 @@ const Contact = () => {
                     id="name"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                     placeholder="John Doe"
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -201,6 +244,7 @@ const Contact = () => {
                     id="email"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                     placeholder="john@example.com"
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -219,6 +263,7 @@ const Contact = () => {
                     id="contact"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                     placeholder="Contact Number"
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -234,6 +279,7 @@ const Contact = () => {
                     id="country"
                     className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                     placeholder="Your Country"
+                    onChange={handleChange}
                     required
                   />
                 </div>
@@ -251,6 +297,7 @@ const Contact = () => {
                   rows={4}
                   className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
                   placeholder="Tell us about your medical needs..."
+                  onChange={handleChange}
                   required
                 ></textarea>
               </div>
@@ -259,7 +306,8 @@ const Contact = () => {
                 type="submit"
                 className="w-full rounded-lg py-6 bg-blue-500 text-base shadow-lg shadow-primary/20"
               >
-                Send Message
+                {loading ? "Sending Your Message": "Send Message"}
+                {/* Send Message */}
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
