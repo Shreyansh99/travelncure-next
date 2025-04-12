@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Image from "next/image";
 import bgimg from "@/assets/landing.jpg";
-import heroVideo from "@/assets/intro.mp4";
+
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -46,8 +46,8 @@ const Hero = () => {
         <Image
           src={bgimg}
           alt="Medical background"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           className="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1E67A8]/70 to-[#071E3F]/70"></div>
@@ -91,8 +91,8 @@ const Hero = () => {
           <div className="relative z-0 mx-auto max-w-[450px]">
             <div className="absolute -inset-0.5 bg-gradient-to-r from-[#64B5F6]/20 to-white/20 rounded-3xl blur-xl opacity-70"></div>
             <div className="bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg rounded-3xl overflow-hidden">
-              <video 
-                src={heroVideo}
+            <video
+                src="/intro.mp4" // Updated src path
                 controls
                 autoPlay
                 muted

@@ -1,9 +1,16 @@
-"use client"; // Required for components using state or interactivity
+"use client";
 
 import { Phone, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="bg-blue-600 text-white">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -20,22 +27,34 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-blue-100 hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="text-blue-100 hover:text-white transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/hospitals" className="text-blue-100 hover:text-white transition-colors">
+                <Link
+                  href="/hospitals"
+                  className="text-blue-100 hover:text-white transition-colors"
+                >
                   Hospitals
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-blue-100 hover:text-white transition-colors">
+                <Link
+                  href="/about"
+                  className="text-blue-100 hover:text-white transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-blue-100 hover:text-white transition-colors">
+                <Link
+                  href="/contact"
+                  className="text-blue-100 hover:text-white transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -63,7 +82,7 @@ const Footer = () => {
 
         <div className="border-t border-blue-400 mt-8 pt-8 text-center">
           <p className="text-blue-100">
-            &copy; {new Date().getFullYear()} TravelNCure. All rights reserved.
+            &copy; {currentYear} TravelNCure. All rights reserved.
           </p>
         </div>
       </div>
