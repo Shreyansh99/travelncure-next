@@ -1,5 +1,7 @@
 // app/page.js
 import Hero from "@/components/Hero";
+import  WhyUs from "@/components/about";
+import Contact from "./contact/page";
 import  WhyUs from "@/components/About";
 import Contact from "@/components/contact";
 import Dept from "@/components/departmentSec";

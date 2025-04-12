@@ -58,18 +58,25 @@ const Navbar = () => {
               Explore
             </button>
             {exploreOpen && (
-              <div className="absolute left-0 mt-2 bg-white rounded-md shadow-lg p-4 w-48 z-10">
-                <Link href="/hospitals">
-                  <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
-                    Hospitals
-                  </div>
-                </Link>
-                <Link href="/doctors">
-                  <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
-                    Doctors
-                  </div>
-                </Link>
-              </div>
+              <motion.div
+              className="absolute left-0 mt-2 bg-white rounded-md shadow-lg p-4 w-48 z-10"
+              initial={{ opacity: 0, y: -10 }}
+              animate={exploreOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              style={{ display: exploreOpen ? "block" : "none" }}
+            >
+              <Link href="/hospitals">
+                <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
+                  Hospitals
+                </div>
+              </Link>
+              <Link href="/doctors">
+                <div className="text-md font-medium text-foreground/80 hover:text-primary transition-colors py-2">
+                  Doctors
+                </div>
+              </Link>
+            </motion.div>
+            
             )}
           </div>
           
