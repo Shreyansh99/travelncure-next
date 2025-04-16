@@ -1,4 +1,4 @@
-"use client"; // Mark the component as a client component
+"use client";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,16 +8,10 @@ import { FaWhatsapp, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const Contact = () => {
   const [toastMessage, setToastMessage] = useState(null);
-
-  const showToast = (title, description, duration) => {
-    setToastMessage({ title, description });
-    setTimeout(() => setToastMessage(null), duration);
-  };
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    contact: "",
+    phone: "",
     country: "",
     message: "",
   });
@@ -25,8 +19,13 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const showToast = (title, description, duration) => {
+    setToastMessage({ title, description });
+    setTimeout(() => setToastMessage(null), duration);
+  };
+
   const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value});
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -48,11 +47,10 @@ const Contact = () => {
 
       const data = await response.json();
 
-      if(!response.ok) {
-        throw new Error(data.message || "Failed to Contact, Try Again!");
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to contact, try again!");
       }
 
-      //After successful registration, show following message
       showToast(
         "Message received",
         "We'll get back to you as soon as possible.",
@@ -213,91 +211,67 @@ const Contact = () => {
             transition={{ duration: 0.7 }}
             className="blue-glass rounded-2xl p-8 md:p-10 shadow-lg"
           >
-            {error && <p className="text-red-500"> {error} </p>}
+            {error && <p className="text-red-500">{error}</p>}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Name
-                  </label>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
                   <input
                     type="text"
                     id="name"
-                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                    placeholder="John Doe"
+                    name="name"
                     onChange={handleChange}
                     required
+                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Email
-                  </label>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
                   <input
                     type="email"
                     id="email"
-                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                    placeholder="john@example.com"
+                    name="email"
                     onChange={handleChange}
                     required
+                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label
-                    htmlFor="contact"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Contact
-                  </label>
+                  <label htmlFor="phone" className="block text-sm font-medium mb-2">Phone</label>
                   <input
                     type="tel"
-                    id="contact"
-                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                    placeholder="Contact Number"
+                    id="phone"
+                    name="phone"
                     onChange={handleChange}
                     required
+                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="country"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    Country
-                  </label>
+                  <label htmlFor="country" className="block text-sm font-medium mb-2">Country</label>
                   <input
                     type="text"
                     id="country"
-                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                    placeholder="Your Country"
+                    name="country"
                     onChange={handleChange}
                     required
+                    className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                   />
                 </div>
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2"
-                >
-                  Message
-                </label>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={4}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
                   placeholder="Tell us about your medical needs..."
-                  onChange={handleChange}
                   required
                 ></textarea>
               </div>
@@ -306,8 +280,7 @@ const Contact = () => {
                 type="submit"
                 className="w-full rounded-lg py-6 bg-black text-base shadow-lg shadow-primary/20"
               >
-                {loading ? "Sending Your Message": "Send Message"}
-                {/* Send Message */}
+                {loading ? "Sending Your Message" : "Send Message"}
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
@@ -325,6 +298,7 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
+
       {toastMessage && (
         <div className="fixed bottom-8 left-8 p-4 bg-white rounded shadow-md">
           <p className="font-semibold">{toastMessage.title}</p>
