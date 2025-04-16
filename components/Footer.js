@@ -75,14 +75,14 @@ const Footer = () => {
                   Contact
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/admin"
                   className="text-blue-100 hover:text-white transition-colors"
                 >
                   Admin Dashboard
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
