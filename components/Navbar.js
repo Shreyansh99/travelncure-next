@@ -4,11 +4,14 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
+  const pathname = usePathname(); // Get the current route
+  const isAdminRoute = pathname.startsWith('/admin'); // Check for admin route
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,9 +34,11 @@ const Navbar = () => {
     <header
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300 ease-in-out py-4",
-        scrolled ? "bg-white/80 backdrop-blur-lg shadow-sm" : "bg-transparent"
+        scrolled ? "bg-white/80 backdrop-blur-lg shadow-sm" : "bg-transparent",
+        isAdminRoute ? "hidden" : "" // Add 'hidden' class for admin routes
       )}
     >
+      
       <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
