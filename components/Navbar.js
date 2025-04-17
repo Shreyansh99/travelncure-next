@@ -5,30 +5,27 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
-
-import { usePathname } from 'next/navigation';
-import { ChevronDown, Menu, X } from "lucide-react";
-
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
-  const pathname = usePathname(); // Get the current route
-  const isAdminRoute = pathname.startsWith('/admin'); // Check for admin route
+  const pathname = usePathname();
+  const isAdminRoute = pathname.startsWith("/admin");
 
   const exploreRef = useRef(null);
 
-  // Close explore dropdown when clicking outside
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (exploreRef.current && !exploreRef.current.contains(event.target)) {
         setExploreOpen(false);
       }
     };
-    
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [exploreRef]);
+  }, []);
 
   const navLinks = [
     { name: "Home", to: "/" },
@@ -38,21 +35,19 @@ const Navbar = () => {
 
   const authLinks = [
     { name: "Login", to: "/login" },
-    { name: "Register", to: "/register" }
+    { name: "Register", to: "/register" },
   ];
 
   const exploreLinks = [
     { name: "Hospitals", to: "/hospitals" },
-    { name: "Doctors", to: "/doctors" }
+    { name: "Doctors", to: "/doctors" },
   ];
 
   return (
-
-    <header className="fixed top-0 w-full z-50 py-4 bg-white shadow-sm">
     <header
       className={cn(
         "fixed top-0 w-full z-50 py-4 bg-white shadow-sm",
-        isAdminRoute ? "hidden" : "" // Add 'hidden' class for admin routes
+        isAdminRoute && "hidden"
       )}
     >
       <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between">
@@ -72,24 +67,23 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-2">
-          {/* Main Navigation Links */}
+          {/* Explore Dropdown */}
           <div className="flex items-center mr-6">
-            {/* Explore Dropdown */}
             <div className="relative px-2" ref={exploreRef}>
               <button
                 className="flex items-center gap-1 px-4 py-2.5 rounded-full text-base font-medium text-blue-600 hover:bg-blue-50 transition-colors"
                 onClick={() => setExploreOpen(!exploreOpen)}
               >
                 Explore
-                <ChevronDown 
-                  size={18} 
+                <ChevronDown
+                  size={18}
                   className={cn(
                     "transition-transform duration-200",
-                    exploreOpen ? "rotate-180" : ""
-                  )} 
+                    exploreOpen && "rotate-180"
+                  )}
                 />
               </button>
-              
+
               <AnimatePresence>
                 {exploreOpen && (
                   <motion.div
@@ -111,6 +105,7 @@ const Navbar = () => {
               </AnimatePresence>
             </div>
 
+            {/* Nav Links */}
             {navLinks.map((link, i) => (
               <Link key={link.name} href={link.to}>
                 <motion.div
@@ -124,8 +119,8 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          
-          {/* Auth Links with visual separation */}
+
+          {/* Auth Links */}
           <div className="flex items-center border-l border-gray-200 pl-6 ml-2">
             {authLinks.map((link, i) => (
               <Link key={link.name} href={link.to}>
@@ -147,7 +142,7 @@ const Navbar = () => {
           </div>
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <div className="md:hidden z-10">
           <button
             className="p-2 rounded-full hover:bg-gray-100 text-gray-700 focus:outline-none"
@@ -179,21 +174,22 @@ const Navbar = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <div className="flex flex-col space-y-3">
+                {/* Explore in Mobile */}
                 <div className="border-b border-gray-100 pb-5 mb-4">
-                  <div 
+                  <div
                     className="flex items-center justify-between px-5 py-4 rounded-lg bg-blue-50 text-blue-600 font-medium text-lg mb-3"
                     onClick={() => setExploreOpen(!exploreOpen)}
                   >
                     Explore
-                    <ChevronDown 
-                      size={20} 
+                    <ChevronDown
+                      size={20}
                       className={cn(
                         "transition-transform duration-200",
-                        exploreOpen ? "rotate-180" : ""
-                      )} 
+                        exploreOpen && "rotate-180"
+                      )}
                     />
                   </div>
-                  
+
                   <AnimatePresence>
                     {exploreOpen && (
                       <motion.div
@@ -216,7 +212,7 @@ const Navbar = () => {
                     )}
                   </AnimatePresence>
                 </div>
-                
+
                 {/* Main Nav Links */}
                 {navLinks.map((link) => (
                   <Link key={link.name} href={link.to}>
@@ -228,10 +224,10 @@ const Navbar = () => {
                     </div>
                   </Link>
                 ))}
-                
+
                 {/* Auth Links */}
                 <div className="border-t border-gray-100 pt-5 mt-4">
-                  {authLinks.map((link, i) => (
+                  {authLinks.map((link) => (
                     <Link key={link.name} href={link.to}>
                       <div
                         className={cn(
