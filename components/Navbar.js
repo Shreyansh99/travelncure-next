@@ -4,13 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-<<<<<<< HEAD
 import { ChevronDown, Menu, X } from "lucide-react";
-=======
+
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X } from "lucide-react";
 
->>>>>>> 51b4e72c03a78c490d0c52b5343f00e64df4aa2a
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,16 +47,14 @@ const Navbar = () => {
   ];
 
   return (
-<<<<<<< HEAD
+
     <header className="fixed top-0 w-full z-50 py-4 bg-white shadow-sm">
-=======
     <header
       className={cn(
         "fixed top-0 w-full z-50 py-4 bg-white shadow-sm",
         isAdminRoute ? "hidden" : "" // Add 'hidden' class for admin routes
       )}
     >
->>>>>>> 51b4e72c03a78c490d0c52b5343f00e64df4aa2a
       <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
