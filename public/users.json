@@ -1,0 +1,29 @@
+[
+    {
+      "id": "user-1",
+      "name": "Ansh",
+      "email": "john.doe@example.com",
+      "phone": "+1-555-1234",
+      "dob": "15-08-1990",
+      "profilePicture": "https://randomuser.me/api/portraits/men/1.jpg",
+      "status": "active"
+    },
+    {
+      "id": "user-2",
+      "name": "Naman",
+      "email": "jane.smith@example.com",
+      "phone": "+1-555-5678",
+      "dob": "22-03-1985",
+       "profilePicture": "https://randomuser.me/api/portraits/women/2.jpg",
+      "status": "active"
+    },
+    {
+      "id": "user-3",
+      "name": "Rahul",
+      "email": "bob.johnson@example.com",
+      "phone": "+1-555-9012",
+      "dob": "10-11-2002",
+      "profilePicture": "https://randomuser.me/api/portraits/men/3.jpg",
+      "status": "pending"
+    }
+  ]
