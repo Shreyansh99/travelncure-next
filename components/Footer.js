@@ -2,17 +2,26 @@
 
 import { Phone, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const pathname = usePathname(); // Get the current route
+  const isAdminRoute = pathname.startsWith("/admin"); // Check for admin route
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
   }, []);
 
   return (
-    <footer className="bg-blue-600 text-white">
+    <footer
+      className={cn(
+        "bg-blue-600 text-white", 
+        isAdminRoute ? "hidden" : ""
+      )}
+    >
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-3 mx-auto w-auto px-5">
           <div className="flex flex-col">
@@ -66,6 +75,14 @@ const Footer = () => {
                   Contact
                 </Link>
               </li>
+              {/* <li>
+                <Link
+                  href="/admin"
+                  className="text-blue-100 hover:text-white transition-colors"
+                >
+                  Admin Dashboard
+                </Link>
+              </li> */}
             </ul>
           </div>
 

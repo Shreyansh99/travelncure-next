@@ -4,11 +4,15 @@ import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X } from "lucide-react";
+
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
+  const pathname = usePathname(); // Get the current route
+  const isAdminRoute = pathname.startsWith('/admin'); // Check for admin route
 
   const exploreRef = useRef(null);
 
@@ -41,7 +45,12 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 py-4 bg-white shadow-sm">
+    <header
+      className={cn(
+        "fixed top-0 w-full z-50 py-4 bg-white shadow-sm",
+        isAdminRoute ? "hidden" : "" // Add 'hidden' class for admin routes
+      )}
+    >
       <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/">
