@@ -1,0 +1,14 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /admin
+Disallow: /dashboard
+
+# Host
+Host: https://travelncure.com
+
+# Sitemaps
+Sitemap: https://travelncure.com/sitemap.xml
