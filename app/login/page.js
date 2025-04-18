@@ -1,7 +1,7 @@
-"use client"; // Add this line to mark it as a client component
+"use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter(); // Initialize router from next/navigation
+  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,7 +37,7 @@ const LoginPage = () => {
         throw new Error(data.message || "Login failed. Try again.");
       }
       // Navigate using Next.js router from next/navigation
-      router.push("/profile/edit");
+      router.push("/");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -112,7 +112,7 @@ const LoginPage = () => {
                 </button>
               </div>
             </div>
-            <div className="flex justify-end">
+            {/* <div className="flex justify-end">
               <Button
                 variant="link"
                 className="p-0 h-auto text-sm"
@@ -121,8 +121,12 @@ const LoginPage = () => {
               >
                 Forgot password?
               </Button>
-            </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            </div> */}
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={loading}
+            >
               {loading ? "Logging in..." : "Login"}
             </Button>
           </form>
