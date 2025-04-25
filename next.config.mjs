@@ -4,6 +4,7 @@ const nextConfig = {
     //     domains: ['cdn.apollohospitals.com', 'rawahealth.com', 'yapita-production.s3.ap-south-1.amazonaws.com'],
     // },
     images: {
+        domains: ['travelncure.com'],
         remotePatterns: [
           {
             protocol: 'https',
