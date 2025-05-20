@@ -154,6 +154,42 @@ const BookConsultation = () => {
     "Liver Transplant": <Leaf className="h-10 w-10" />
   };
 
+  // Define treatment icons based on department
+  const treatmentIcons = {
+    "Neurology": {
+      "Neurological Disorders": <Brain className="h-6 w-6" />,
+      "Stroke": <Activity className="h-6 w-6" />,
+      "Epilepsy": <Stethoscope className="h-6 w-6" />
+    },
+    "Ophthalmology": {
+      "LASIK, Cataract Surgery": <Eye className="h-6 w-6" />
+    },
+    "Dental": {
+      "Implants, Cosmetic Dentistry": <Pill className="h-6 w-6" />
+    },
+    "Cardiology": {
+      "Heart Diseases": <Heart className="h-6 w-6" />,
+      "Angioplasty": <Activity className="h-6 w-6" />,
+      "Cardiac Surgery": <Scissors className="h-6 w-6" />
+    },
+    "Orthopedics": {
+      "Joint Replacement": <Bone className="h-6 w-6" />,
+      "Fracture Treatment": <Stethoscope className="h-6 w-6" />,
+      "Spinal Surgery": <Dna className="h-6 w-6" />
+    },
+    "Oncology": {
+      "Cancer Treatment": <Microscope className="h-6 w-6" />,
+      "Radiation Therapy": <Beaker className="h-6 w-6" />,
+      "Chemotherapy": <Pill className="h-6 w-6" />
+    },
+    "Pediatrics": {
+      "Child Healthcare, Vaccinations": <Baby className="h-6 w-6" />
+    },
+    "Cosmetic": {
+      "Plastic Surgery, Aesthetics": <Scissors className="h-6 w-6" />
+    }
+  };
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -243,7 +279,7 @@ const BookConsultation = () => {
 
           {/* Departments Section */}
           <motion.div
-            className="py-10 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-xl mb-12"
+            className="py-10 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-xl mb-12 departments-section"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -283,9 +319,17 @@ const BookConsultation = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-                Select Treatment for <span className="text-blue-600">{selectedDepartment}</span>
-              </h2>
+              <div className="flex items-center justify-center mb-8">
+                <div className="p-3 bg-blue-100 rounded-full mr-3">
+                  {departmentIcons[selectedDepartment] || <Stethoscope className="h-8 w-8 text-blue-600" />}
+                </div>
+                <h2 className="text-2xl font-bold text-gray-800">
+                  Select Treatment for <span className="text-blue-600">{selectedDepartment}</span>
+                </h2>
+              </div>
+              <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+                Choose the specific treatment you're interested in to receive a personalized consultation from our medical experts.
+              </p>
 
               <motion.div
                 className="flex flex-wrap gap-4 justify-center"
@@ -298,52 +342,85 @@ const BookConsultation = () => {
                     key={index}
                     variants={itemVariants}
                     whileHover="hover"
-                    className={`flex flex-col items-center justify-center w-[180px] h-[120px] p-4 border rounded-xl shadow-sm cursor-pointer text-center transition-all ${
+                    className={`flex flex-col items-center justify-center w-[180px] h-[150px] p-4 border rounded-xl shadow-sm cursor-pointer text-center transition-all ${
                       selectedTreatment === subcategory
                         ? "bg-blue-50 border-blue-400 shadow-md"
                         : "bg-white hover:bg-gray-50 border-gray-200"
                     }`}
                     onClick={() => handleSubcategoryClick(subcategory)}
                   >
+                    <div className={`p-3 rounded-full mb-3 ${
+                      selectedTreatment === subcategory
+                        ? "bg-blue-100 text-blue-600"
+                        : "bg-gray-100 text-gray-600"
+                    }`}>
+                      {treatmentIcons[selectedDepartment]?.[subcategory] ||
+                       departmentIcons[selectedDepartment] ||
+                       <Stethoscope className="h-6 w-6" />}
+                    </div>
+
                     {selectedTreatment === subcategory && (
-                      <CheckCircle2 className="h-5 w-5 text-green-500 mb-1" />
+                      <div className="absolute top-2 right-2">
+                        <CheckCircle2 className="h-5 w-5 text-green-500" />
+                      </div>
                     )}
+
                     <span className="text-md font-medium text-gray-800">{subcategory}</span>
                   </motion.div>
                 ))}
               </motion.div>
+
+
             </motion.div>
           )}
 
           {/* Consultation Form */}
           {selectedTreatment && (
             <motion.div
-              className="my-8 mx-auto max-w-2xl bg-white p-8 rounded-xl shadow-lg border border-gray-100 consultation-form"
+              className="mt-16 mb-20 mx-auto max-w-3xl bg-white p-10 rounded-xl shadow-xl border border-gray-100 consultation-form"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex items-center mb-6">
-                <div className="p-3 bg-blue-100 rounded-full mr-4">
-                  {departmentIcons[selectedDepartment] || <Stethoscope className="h-6 w-6 text-blue-600" />}
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-800">{selectedTreatment}</h2>
-                  <p className="text-gray-600">{selectedDepartment} Department</p>
+              {/* Header with icon and treatment info */}
+              <div className="flex items-center justify-between mb-8 border-b border-gray-100 pb-6">
+                <div className="flex items-center">
+                  <div className="p-4 bg-blue-100 rounded-full mr-5">
+                    {departmentIcons[selectedDepartment] || <Stethoscope className="h-7 w-7 text-blue-600" />}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-800">{selectedTreatment}</h2>
+                    <p className="text-gray-600">{selectedDepartment} Department</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-blue-50 p-4 rounded-lg mb-6">
-                <h3 className="font-semibold text-blue-800 mb-2">What happens next?</h3>
-                <p className="text-sm text-blue-700">
+              {/* Info box */}
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100/50 p-5 rounded-lg mb-8 border border-blue-100">
+                <h3 className="font-semibold text-blue-800 mb-2 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4"/>
+                    <path d="M12 8h.01"/>
+                  </svg>
+                  What happens next?
+                </h3>
+                <p className="text-sm text-blue-700 leading-relaxed">
                   Our medical team will review your information and connect you with the best specialists for your condition.
                   You'll receive a detailed treatment plan and cost estimate within 48 hours.
                 </p>
               </div>
 
-              <div className="flex flex-col space-y-6">
+              {/* Form fields */}
+              <div className="grid grid-cols-1 gap-8">
                 <div>
-                  <Label htmlFor="reports" className="text-lg font-medium text-gray-700 mb-2 block">Upload Medical Reports (PDF)</Label>
+                  <Label htmlFor="reports" className="text-lg font-medium text-gray-700 mb-3 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                      <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                    </svg>
+                    Upload Medical Reports (PDF)
+                  </Label>
                   <Input
                     type="file"
                     id="reports"
@@ -351,11 +428,18 @@ const BookConsultation = () => {
                     onChange={handleFileChange}
                     className="cursor-pointer border-2 border-gray-300 rounded-lg p-3 hover:border-blue-400 transition-colors"
                   />
-                  <p className="text-sm text-gray-500 mt-1">Maximum file size: 10MB</p>
+                  <p className="text-xs text-gray-500 mt-2">Maximum file size: 10MB</p>
                 </div>
 
                 <div>
-                  <Label htmlFor="condition" className="text-lg font-medium text-gray-700 mb-2 block">Brief Medical Condition</Label>
+                  <Label htmlFor="condition" className="text-lg font-medium text-gray-700 mb-3 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                      <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+                      <line x1="16" y1="8" x2="2" y2="22"/>
+                      <line x1="17.5" y1="15" x2="9" y2="15"/>
+                    </svg>
+                    Brief Medical Condition
+                  </Label>
                   <textarea
                     id="condition"
                     className="w-full p-4 border-2 border-gray-300 rounded-lg min-h-[150px] focus:border-blue-400 focus:ring-blue-400 transition-colors"
@@ -365,25 +449,52 @@ const BookConsultation = () => {
                   />
                 </div>
 
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={loading}
-                    className="w-full py-6 text-lg bg-blue-600 hover:bg-blue-700 rounded-lg shadow-lg flex items-center justify-center gap-2"
+                <div className="mt-4">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="mb-4"
                   >
-                    {loading ? (
-                      <>
-                        <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
-                        Processing...
-                      </>
-                    ) : (
-                      <>Submit Consultation Request</>
-                    )}
-                  </Button>
-                </motion.div>
+                    <Button
+                      onClick={handleSubmit}
+                      disabled={loading}
+                      className="w-full py-6 text-lg bg-blue-600 hover:bg-blue-700 rounded-lg shadow-lg flex items-center justify-center gap-2"
+                    >
+                      {loading ? (
+                        <>
+                          <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
+                          Processing...
+                        </>
+                      ) : (
+                        <>Submit Consultation Request</>
+                      )}
+                    </Button>
+                  </motion.div>
+
+                  <div className="text-center">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => {
+                        setSelectedTreatment(null);
+
+                        // Scroll back to treatments section
+                        setTimeout(() => {
+                          const treatmentsSection = document.querySelector('.treatments-section');
+                          if (treatmentsSection) {
+                            treatmentsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }, 100);
+                      }}
+                      className="inline-flex items-center gap-2 py-2 text-blue-600 hover:text-blue-800 transition-colors"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m15 18-6-6 6-6"/>
+                      </svg>
+                      Back to Treatments
+                    </motion.button>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
