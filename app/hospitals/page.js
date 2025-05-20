@@ -44,15 +44,23 @@ const Hospitals = () => {
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center">
-              {hospital.images?.length > 0 && (
+              {hospital.images?.length > 0 ? (
                 <Image
-                  src={hospital.images[0]} 
+                  src={hospital.images[0]}
                   alt={hospital.name}
                   width={320}
                   height={200}
                   style={{ objectFit: "cover" }}
                   className="rounded-md"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/hospital-placeholder.jpg"; // Fallback image
+                  }}
                 />
+              ) : (
+                <div className="w-[320px] h-[200px] bg-gray-200 rounded-md flex items-center justify-center">
+                  <span className="text-gray-500">No image available</span>
+                </div>
               )}
               <p className="mb-4 text-center">{hospital.metaDescription}</p>
             </CardContent>
