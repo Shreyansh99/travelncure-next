@@ -29,7 +29,7 @@ const Hero = () => {
     setFormData({ name: "", email: "", phone: "", treatment: "" });
   };
 
-  // Parallax effect on scroll
+  // Modified parallax effect on scroll - gentler and prevents text fade
   useEffect(() => {
     const handleScroll = () => {
       if (!heroRef.current) return;
@@ -38,12 +38,25 @@ const Hero = () => {
       const heroImage = heroRef.current.querySelector(".hero-image");
       const heroContent = heroRef.current.querySelector(".hero-content");
 
+      // Limit the maximum parallax movement
+      const maxMovement = 50;
+      const imageMovement = Math.min(scrollY * 0.1, maxMovement);
+      const contentMovement = Math.min(scrollY * 0.05, maxMovement / 2);
+
       if (heroImage) {
-        heroImage.style.transform = `translateY(${scrollY * 0.2}px)`;
+        heroImage.style.transform = `translateY(${imageMovement}px)`;
+        // Maintain opacity
+        heroImage.style.opacity = Math.max(1 - scrollY / 1000, 0.7);
       }
 
       if (heroContent) {
-        heroContent.style.transform = `translateY(${scrollY * 0.1}px)`;
+        heroContent.style.transform = `translateY(${contentMovement}px)`;
+        // Maintain opacity - text stays fully visible
+        heroContent.style.opacity = Math.max(1 - scrollY / 2000, 0.95);
+
+        // Add text shadow as scroll increases to maintain readability
+        const shadowIntensity = Math.min(scrollY / 500, 0.3);
+        heroContent.style.textShadow = `0 2px 4px rgba(0,0,0,${shadowIntensity})`;
       }
     };
 
@@ -55,37 +68,98 @@ const Hero = () => {
     <section
       id="home"
       ref={heroRef}
-      className="relative min-h-screen flex items-center pt-20 overflow-hidden"
+      className="relative min-h-screen flex items-center pt-20 overflow-hidden font-sans"
     >
-      {/* Background elements */}
+      {/* Modern Background elements */}
       <div className="absolute inset-0">
-        <Image
-          src={bgimg}
-          alt="Medical background"
-          fill
-          style={{ objectFit: "cover" }}
-          className="w-full h-full"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0099ff]/90 to-[#0066cc]/90"></div>
+        {/* Gradient background with modern colors */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0099ff] via-[#0077cc] to-[#0055aa]"></div>
+
+        {/* Animated wave effect */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="wave-container">
+            <div className="wave wave1"></div>
+            <div className="wave wave2"></div>
+          </div>
+        </div>
+
+        {/* Modern medical icons background pattern */}
+        <div className="absolute inset-0 opacity-15 bg-[url('/images/medical-pattern.svg')] bg-repeat bg-[length:200px_200px]"></div>
+
+        {/* Modern geometric shapes with floating animation */}
+        <div
+          className="absolute top-20 right-20 w-64 h-64 rounded-full bg-white opacity-5"
+          style={{ animation: "float 8s ease-in-out infinite" }}
+        ></div>
+        <div
+          className="absolute bottom-20 left-20 w-40 h-40 rounded-full bg-white opacity-5"
+          style={{ animation: "float 12s ease-in-out infinite", animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute top-1/3 left-1/4 w-20 h-20 rounded-full bg-white opacity-5"
+          style={{ animation: "float 10s ease-in-out infinite", animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-1/3 right-1/4 w-32 h-32 rounded-full bg-white opacity-5"
+          style={{ animation: "float 9s ease-in-out infinite", animationDelay: "3s" }}
+        ></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center gap-12 md:gap-8">
         {/* Hero Content */}
         <motion.div
-          className="hero-content flex-1 text-center md:text-left space-y-6 pt-16 md:pt-20 text-white"
+          className="hero-content flex-1 text-center md:text-left space-y-8 pt-12 md:pt-16 text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight tracking-tight">
-            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="block">
+          <motion.div
+            className="flex flex-col items-center md:items-start mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="flex items-center gap-4 mb-2">
+              <Image
+                src="/logo.png"
+                alt="Healithon Logo"
+                width={120}
+                height={120}
+                className="rounded-md"
+                priority
+              />
+              <div className="flex flex-col">
+                <div className="text-4xl md:text-5xl font-display font-bold text-white drop-shadow-md" style={{ textShadow: "0 2px 4px rgba(0,0,0,0.1)" }}>
+                  Healithon
+                </div>
+                <div className="text-lg text-white/90 font-medium">International Healthcare Experts</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold leading-tight tracking-tight mt-2">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="block text-white drop-shadow-md"
+              style={{ textShadow: "0 2px 4px rgba(0,0,0,0.15)" }}
+            >
               Medical Treatment With
             </motion.span>
-            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="block text-white">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="block text-white drop-shadow-md"
+              style={{ textShadow: "0 2px 4px rgba(0,0,0,0.15)" }}
+            >
               Unmatched Personal Care
             </motion.span>
           </h1>
 
-          <motion.p className="text-lg md:text-xl text-white/90 max-w-xl mx-auto md:mx-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <motion.p
+            className="text-lg md:text-xl text-white max-w-xl mx-auto md:mx-0 mt-4 font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            style={{ textShadow: "0 1px 2px rgba(0,0,0,0.15)" }}
+          >
             World's Most Trusted Medical Travel Assistance Platform
           </motion.p>
 
@@ -131,9 +205,9 @@ const Hero = () => {
           transition={{ duration: 1, delay: 0.5 }}
         >
           <div className="relative z-0 mx-auto max-w-[450px]">
-            <div className="absolute -inset-1 bg-white/20 rounded-3xl blur-xl opacity-70"></div>
-            <div className="bg-white backdrop-blur-lg border border-white/20 shadow-lg rounded-3xl overflow-hidden p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Let Us Help You</h3>
+            <div className="absolute -inset-1 bg-white/20 rounded-2xl blur-xl opacity-70"></div>
+            <div className="bg-white backdrop-blur-lg border border-white/20 shadow-xl rounded-2xl overflow-hidden p-6">
+              <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">Let Us Help You</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <input
@@ -142,7 +216,7 @@ const Hero = () => {
                     placeholder="Enter Name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 text-gray-700"
                     required
                   />
                 </div>
@@ -153,13 +227,13 @@ const Hero = () => {
                     placeholder="Enter Email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 text-gray-700"
                     required
                   />
                 </div>
-                <div className="flex gap-3">
+                <div className="flex gap-2">
                   <select
-                    className="w-1/4 px-2 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    className="w-1/4 px-2 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white text-gray-700"
                   >
                     <option value="+91">+91</option>
                     <option value="+1">+1</option>
@@ -171,7 +245,7 @@ const Hero = () => {
                     placeholder="Your Phone Number"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-3/4 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-3/4 px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 text-gray-700"
                     required
                   />
                 </div>
@@ -180,7 +254,7 @@ const Hero = () => {
                     name="treatment"
                     value={formData.treatment}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white text-gray-700"
                     required
                   >
                     <option value="" disabled>Select City</option>
@@ -192,9 +266,9 @@ const Hero = () => {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full py-3 px-4 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg flex items-center justify-center"
+                  className="w-full py-2.5 px-4 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg flex items-center justify-center transition-colors duration-200"
                 >
-                  Get FREE Quote
+                  Get FREE Consultation
                 </Button>
               </form>
             </div>

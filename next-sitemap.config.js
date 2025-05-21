@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://travelncure.com",
+  siteUrl: "https://travelncure.com", // Will be updated to healithon.com when domain is ready
   generateRobotsTxt: true,
   changefreq: "weekly",
   priority: 0.7,

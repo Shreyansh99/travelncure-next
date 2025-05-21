@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0099ff" />
+      <stop offset="100%" stop-color="#0055aa" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Main Circle Background -->
+  <circle cx="256" cy="256" r="240" fill="url(#logoGradient)" />
+  
+  <!-- Inner Circle -->
+  <circle cx="256" cy="256" r="220" fill="white" opacity="0.1" />
+  
+  <!-- Medical Cross -->
+  <g transform="translate(256, 256) rotate(45) translate(-256, -256)">
+    <rect x="236" y="156" width="40" height="200" rx="20" fill="white" />
+    <rect x="156" y="236" width="200" height="40" rx="20" fill="white" />
+  </g>
+  
+  <!-- Globe Grid Lines -->
+  <g fill="none" stroke="white" stroke-width="3" opacity="0.7">
+    <!-- Horizontal Lines -->
+    <path d="M136,196 C136,196 196,176 256,176 C316,176 376,196 376,196" />
+    <path d="M116,256 C116,256 186,236 256,236 C326,236 396,256 396,256" />
+    <path d="M136,316 C136,316 196,336 256,336 C316,336 376,316 376,316" />
+    
+    <!-- Vertical Lines -->
+    <path d="M196,136 C196,136 176,196 176,256 C176,316 196,376 196,376" />
+    <path d="M256,116 C256,116 236,186 236,256 C236,326 256,396 256,396" />
+    <path d="M316,136 C316,136 336,196 336,256 C336,316 316,376 316,376" />
+  </g>
+  
+  <!-- Airplane Symbol -->
+  <g transform="translate(256, 256) rotate(-30) translate(-256, -256)">
+    <path d="M320,256 L280,236 L200,256 L280,276 Z" fill="white" />
+    <path d="M280,236 L280,276" stroke="white" stroke-width="4" fill="none" />
+    <path d="M260,246 L300,266" stroke="white" stroke-width="4" fill="none" />
+  </g>
+  
+  <!-- Text "TravelNCure" - Removed from SVG to add via HTML/CSS for better control -->
+</svg>

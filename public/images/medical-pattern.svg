@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient for modern look -->
+    <linearGradient id="medicalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+
+  <g fill="url(#medicalGradient)">
+    <!-- Modern Medical Symbols -->
+
+    <!-- Heartbeat Line -->
+    <path d="M10,60 L30,60 L40,30 L50,90 L60,60 L80,60"
+          stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+    <!-- Stethoscope -->
+    <path d="M120,40 C130,40 135,50 135,60 L135,70 C135,75 130,80 125,80 C120,80 115,75 115,70 C115,65 120,60 125,60"
+          stroke="#FFFFFF" stroke-width="2" fill="none"/>
+    <circle cx="125" cy="70" r="5" fill="#FFFFFF"/>
+
+    <!-- DNA Helix -->
+    <path d="M160,20 C170,30 150,40 160,50 C170,60 150,70 160,80"
+          stroke="#FFFFFF" stroke-width="2" fill="none"/>
+    <path d="M180,20 C170,30 190,40 180,50 C170,60 190,70 180,80"
+          stroke="#FFFFFF" stroke-width="2" fill="none"/>
+    <line x1="160" y1="30" x2="180" y2="30" stroke="#FFFFFF" stroke-width="1.5"/>
+    <line x1="160" y1="50" x2="180" y2="50" stroke="#FFFFFF" stroke-width="1.5"/>
+    <line x1="160" y1="70" x2="180" y2="70" stroke="#FFFFFF" stroke-width="1.5"/>
+
+    <!-- Modern Medical Cross -->
+    <rect x="30" y="120" width="20" height="5" rx="2.5" />
+    <rect x="37.5" y="112.5" width="5" height="20" rx="2.5" />
+
+    <!-- Pill -->
+    <rect x="80" y="110" width="30" height="15" rx="7.5" fill="#FFFFFF"/>
+    <rect x="80" y="110" width="15" height="15" rx="7.5" fill="#FFFFFF" fill-opacity="0.7"/>
+
+    <!-- Hospital Building -->
+    <rect x="130" y="110" width="30" height="25" rx="2" />
+    <rect x="142.5" y="110" width="5" height="10" y="-10" />
+    <rect x="135" y="120" width="5" height="7" />
+    <rect x="150" y="120" width="5" height="7" />
+    <rect x="142.5" y="135" width="5" height="7" y="-7" />
+
+    <!-- Airplane for Medical Tourism -->
+    <path d="M40,170 L60,160 L80,170 L60,180 Z" />
+    <path d="M60,160 L60,180" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+    <path d="M50,165 L70,165" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+
+    <!-- Globe for International Healthcare -->
+    <circle cx="120" cy="165" r="15" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M105,165 L135,165" stroke="#FFFFFF" stroke-width="1"/>
+    <path d="M120,150 L120,180" stroke="#FFFFFF" stroke-width="1"/>
+    <path d="M108,155 C115,145 125,145 132,155" stroke="#FFFFFF" stroke-width="1" fill="none"/>
+    <path d="M108,175 C115,185 125,185 132,175" stroke="#FFFFFF" stroke-width="1" fill="none"/>
+
+    <!-- Modern Medical Technology -->
+    <rect x="160" y="150" width="20" height="30" rx="3" />
+    <rect x="165" y="155" width="10" height="15" rx="1" fill="none" stroke="#FFFFFF"/>
+    <circle cx="170" cy="175" r="2" />
+  </g>
+</svg>

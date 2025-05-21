@@ -23,7 +23,7 @@ const AdminDashboardHomePage = () => {
           <div className="flex items-center gap-2">
             {/* Replace with your website logo */}
             <span className="text-xl font-bold text-teal-600">
-              Travel N Cure
+              Healithon
             </span>
           </div>
           <h1 className="text-2xl font-semibold text-teal-600">

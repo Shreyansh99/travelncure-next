@@ -4,7 +4,8 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Menu, X, Search } from "lucide-react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const Navbar = () => {
@@ -16,9 +17,8 @@ const Navbar = () => {
     { name: "Home", to: "/" },
     { name: "Hospitals", to: "/hospitals" },
     { name: "Doctors", to: "/doctors" },
-    { name: "Knowledge", to: "/blogs" },
-    { name: "Patient Stories", to: "/about" },
-    { name: "HNI Consult", to: "/contact" },
+    { name: "Medical Guides", to: "/blogs" },
+    { name: "Contact Us", to: "/contact" },
   ];
 
   const authLinks = [
@@ -33,7 +33,7 @@ const Navbar = () => {
         isAdminRoute && "hidden"
       )}
     >
-      <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between">
+      <div className="container max-w-7xl mx-auto px-4 flex items-center justify-between space-x-8">
         {/* Logo */}
         <Link href="/">
           <motion.div
@@ -42,35 +42,30 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-2xl font-display font-bold text-white">
-              Vaidam.com
-            </span>
-            <span className="text-xs text-white/80">Get Expert Guidance</span>
+            <Image
+              src="/logo.png"
+              alt="Healithon Logo"
+              width={40}
+              height={40}
+              className="rounded-md"
+            />
+            <div className="flex flex-col">
+              <span className="text-2xl font-display font-bold text-white">
+                  Healithon
+                </span>
+                <span className="text-xs text-white/80">International Healthcare Experts</span>
+            </div>
           </motion.div>
         </Link>
-
-        {/* Search Bar */}
-        <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <Search className="w-5 h-5 text-gray-400" />
-            </div>
-            <input
-              type="search"
-              className="block w-full p-2.5 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Search for hospitals, treatments..."
-            />
-          </div>
-        </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center">
           {/* Nav Links */}
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-3">
             {navLinks.map((link, i) => (
               <Link key={link.name} href={link.to}>
                 <motion.div
-                  className="px-3 py-2 text-sm font-medium text-white hover:bg-white/10 rounded transition-colors"
+                  className="px-4 py-2 text-base font-medium text-white hover:bg-white/10 rounded transition-colors"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.05 }}
@@ -81,16 +76,16 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Get a FREE quote button */}
+          {/* Get a FREE Consultation button */}
           <div className="ml-4">
             <Link href="/consultation">
               <motion.div
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded transition-colors"
+                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-base font-medium rounded transition-colors"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Get a FREE quote
+                Get a FREE Consultation
               </motion.div>
             </Link>
           </div>
@@ -121,26 +116,12 @@ const Navbar = () => {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              className="fixed inset-0 bg-white md:hidden flex flex-col pt-20 px-6"
+              className="fixed inset-0 bg-white md:hidden flex flex-col pt-24 px-6"
               initial={{ opacity: 0, x: "100%" }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              {/* Search in Mobile */}
-              <div className="mb-6">
-                <div className="relative w-full">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <Search className="w-5 h-5 text-gray-400" />
-                  </div>
-                  <input
-                    type="search"
-                    className="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Search for hospitals, treatments..."
-                  />
-                </div>
-              </div>
-
               <div className="flex flex-col space-y-1">
                 {/* Main Nav Links */}
                 {navLinks.map((link) => (
@@ -173,14 +154,14 @@ const Navbar = () => {
                   ))}
                 </div>
 
-                {/* Get a FREE quote button */}
+                {/* Get a FREE Consultation button */}
                 <div className="mt-4">
                   <Link href="/consultation">
                     <div
                       className="px-4 py-3 bg-red-500 text-white text-base font-medium rounded-lg text-center"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      Get a FREE quote
+                      Get a FREE Consultation
                     </div>
                   </Link>
                 </div>

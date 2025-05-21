@@ -3,8 +3,11 @@ import Footer from "@/components/Footer";
 import './globals.css'
 
 export const metadata = {
-  title: "Travel N Cure",
-  description: "Your medical tourism partner",
+  title: "TravelNCure | International Medical Tourism",
+  description: "Your trusted partner for international medical tourism, connecting you with world-class healthcare facilities worldwide",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({ children }) {

@@ -121,7 +121,7 @@ const Contact = () => {
                 <div>
                   <h3 className="text-lg font-bold mb-1">Email Us</h3>
                   <p className="text-muted-foreground">
-                    travelncurewellness@gmail.com
+                    healithon@gmail.com
                   </p>
                 </div>
               </div>
@@ -190,7 +190,7 @@ const Contact = () => {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/company/travle-n-cure-wellness/"
+                href="https://www.linkedin.com/company/healithon/"
                 className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors"
               >
                 <FaLinkedin />

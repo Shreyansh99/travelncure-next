@@ -18,14 +18,14 @@ const Footer = () => {
   return (
     <footer
       className={cn(
-        "bg-blue-600 text-white", 
+        "bg-blue-600 text-white",
         isAdminRoute ? "hidden" : ""
       )}
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-3 mx-auto w-auto px-5">
           <div className="flex flex-col">
-            <h3 className="text-xl font-bold mb-4">TravelCure</h3>
+            <h3 className="text-xl font-bold mb-4">Healithon</h3>
             <p className="text-blue-100 w-2/3">
               Your trusted partner in medical tourism, combining world-class
               healthcare with exceptional travel experiences.

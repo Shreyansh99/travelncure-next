@@ -59,7 +59,7 @@ const LoginPage = () => {
               <LogIn className="h-6 w-6 text-white" />
             </div>
           </div>
-          <CardTitle className="text-center text-2xl font-bold">Welcome to TravelCure</CardTitle>
+          <CardTitle className="text-center text-2xl font-bold">Welcome to Healithon</CardTitle>
           <CardDescription className="text-center">Login to access your medical tourism portal</CardDescription>
         </CardHeader>
         <CardContent>
